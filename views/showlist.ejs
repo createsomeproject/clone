@@ -1,0 +1,90 @@
+<div class="app-main">
+    <header class="main-heading">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                 
+                <div class="page-title">
+                    <h5 class="one">Checklist View</h5>
+                </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                   
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="row gutters">
+           
+
+<% if (typeof CheckList !='' && CheckList.length > 0) { %>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <%-include('./partials/errors') %>
+                    <div class="card custom-bdr">
+                        <div class="card-header three">Your Checklist view</div>
+                       
+                        <div class="card-body">
+                            <table id="basicExample" class="table table-bordered">
+                                <thead>
+                                    <tr class="four">
+                                        <th>Id</th>
+                                        <th>User</th>
+                                        <th>Email</th>
+                                        <th>Progress</th>
+                                        <th>Notes</th>
+                                        <th>CreatedAt</th>
+                                        <th>Action Edit</th>
+                                        <th>Action Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% CheckList.forEach(function(list,index){ %>
+                                    <tr class="four">
+                                    <td><a href="/checklist/<%=list._id%>"class="nolink"><%=index + 1%></a></td>
+                                    <td><%=list.user %> </td>
+                                    <td><%=list.email %> </td>
+                                    <td><%=list.progress %> </td>
+                                      <td><%=list.note %> </td>
+                                    <td><%=list.createdAt %> </td>
+                                    <td>
+                                        <a href="/checklist/edit/<%=list._id%>" class="btn red"><i class="icon-emoji-happy"></i></a>
+                                </td>
+                                <td>
+                                    <form method="post" action="/checklist/drop/<%=list._id%>">
+                                        <button type="submit" class="btn btn-danger pull-right"><i class="icon-fire"></i></button>
+                                    </form>
+                                </td>
+                                </tr>
+                                <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<% } %>
+        </div>
+    
+            <input type="hidden" name="limitNumber" id="limitNumber" value="<%=limitNumber%>">
+            <input type="hidden" name="pagenumber" id="pagenumber" value="<%=pagenumber%>">
+    
+        <button class="btn btn-dark five" id="CallLoadMore" type="button" onclick="LoadMoreFunc()">Load More</button>
+    </div>
+<script>
+        const LoadMoreFunc = () => {
+            const limitNumber =parseInt(document.getElementById('limitNumber').value)
+            const pagenumber = parseInt(document.getElementById('pagenumber').value) + 1
+            document.getElementById("CallLoadMore").disabled = true;
+            console.log(pagenumber,limitNumber)
+            
+                fetch(`http://localhost:1999/checklist/loadmore/?limitNumber=${limitNumber}&pagenumber=${pagenumber}`
+                ).then(function(response){
+                    console.log(response)
+                    return response.json()
+                })
+                .then(function(result){
+                    return result
+                })
+                .catch( err => console.log(err))
+        }
+</script> 

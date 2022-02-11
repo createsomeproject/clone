@@ -1,0 +1,74 @@
+<div class="app-main">
+    <header class="main-heading">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+    
+                <div class="page-title">
+                        <h5 class="one">Make A Checklist</h5>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="section-container">
+                    <div class="section-wrapper white left">
+                        <div class="row justify-content-md-center gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <form action="/checklist/add" method="POST">
+                                    <div class="form-block">
+                                        <div class="form-block-header">
+                                            <h5 class="two">Add Your Favourite Checklist</h5>
+                                        <%-include('./partials/errors') %>
+                                        </div>
+                                        <div class="form-block-body">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="mobile" name="user"
+                                                    placeholder="User" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="subject" name="email"
+                                                    placeholder="Email" required>
+                                            </div>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <label class="input-group-text" for="inputGroupSelect01">Progress</label>
+                                                        </div>
+                                                        <select class="custom-select" id="inputGroupSelect01" required name="progress">
+                                                            <option selected value="uncomplete">Uncompleted</option>
+                                                            <option value="ongoing">Ongoing</option>
+                                                            <option value="complete">Completed</option>
+                                                        </select>
+                                                    </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="message" placeholder="Note" required name="note"
+                                                    maxlength="50" rows="3"></textarea>
+                                                <div class="form-text text-muted">
+                                                    <p id="characterLeft" class="help-block">You have reached the limit
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button type="submit" id="submit"
+                                                class="btn btn-primary pull-right">Submit</button>
+                                                <a href="/checklist/list" class="btn btn-danger pull-right">Cancel</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="main-footer">
+        Copyright Kingfisher Admin 2018.
+    </footer>
+</div>
